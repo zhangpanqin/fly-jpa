@@ -4,4 +4,6 @@ import com.fly.jpa.blog.domain.entity.Blog;
 
 public interface BlogRepository {
     Blog save(Blog blog);
+
+    void deleteAll();
 }

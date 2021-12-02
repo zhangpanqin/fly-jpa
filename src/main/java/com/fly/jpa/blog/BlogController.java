@@ -5,6 +5,7 @@ import com.fly.jpa.blog.api.response.CreateBlogResponse;
 import com.fly.jpa.blog.service.BlogAppService;
 import com.fly.jpa.blog.service.mapper.BlogAppMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +26,11 @@ public class BlogController {
         return CreateBlogResponse.builder()
                 .id(blog.getId())
                 .build();
+    }
+
+    @DeleteMapping("/all")
+    public String deleteAll() {
+        service.deleteAll();
+        return "success";
     }
 }

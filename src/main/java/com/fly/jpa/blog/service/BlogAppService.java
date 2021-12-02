@@ -16,4 +16,8 @@ public class BlogAppService {
         var blog = Blog.create(command, 2L);
         return blogRepository.save(blog);
     }
+
+    public void deleteAll() {
+        blogRepository.deleteAll();
+    }
 }

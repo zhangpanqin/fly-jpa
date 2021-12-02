@@ -1,0 +1,24 @@
+version: '3'
+services:
+  db:
+    container_name: fly-jpa-service-postgre
+    image: postgres:12.4
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=fly_jpa
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - fly-jpa-service-postgre-data:/var/lib/postgresql/data
+    networks:
+      - fly-jpa-service-network
+
+networks:
+  fly-jpa-service-network:
+    driver: bridge
+
+volumes:
+  fly-jpa-service-postgre-data:
+    driver: local

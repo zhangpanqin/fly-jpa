@@ -4,6 +4,7 @@ buildscript {
         zonkySpringTestVersion = '2.1.0'
         zonkyPostgresVersion = '1.3.1'
         mockitoInlineVersion = '3.12.4'
+        jpamodelgenVersion = '5.4.32.Final'
     }
 }
 plugins {
@@ -21,6 +22,9 @@ sourceCompatibility = '11'
 java {
     sourceCompatibility JavaVersion.VERSION_11
     targetCompatibility JavaVersion.VERSION_11
+}
+compileJava{
+    options.compilerArgs.add '-AaddGeneratedAnnotation=true'
 }
 configurations {
     compileOnly {
@@ -44,10 +48,13 @@ dependencies {
     implementation 'org.mapstruct:mapstruct:1.4.2.Final'
     implementation "org.springdoc:springdoc-openapi-ui:$springDocOpenapiUiVersion"
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
+    // 使用 JpaSpecificationExecutor
+    annotationProcessor "org.hibernate:hibernate-jpamodelgen:$jpamodelgenVersion"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation "org.mockito:mockito-inline:$mockitoInlineVersion"
     // in order to use main and test of source code in isolationTest
@@ -65,4 +72,5 @@ wrapper {
     gradleVersion "7.3"
 }
 isolationTest.shouldRunAfter test
+check.dependsOn isolationTest
 apply from: "${rootProject.projectDir}/gradle/docker-compose/docker-compose.gradle"

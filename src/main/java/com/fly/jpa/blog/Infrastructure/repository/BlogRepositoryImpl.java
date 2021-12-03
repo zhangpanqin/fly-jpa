@@ -1,11 +1,15 @@
 package com.fly.jpa.blog.Infrastructure.repository;
 
+import com.fly.jpa.blog.Infrastructure.entity.BlogEntity;
 import com.fly.jpa.blog.Infrastructure.mapper.BlogMapper;
 import com.fly.jpa.blog.Infrastructure.repository.jpa.BlogJpaRepository;
 import com.fly.jpa.blog.domain.entity.Blog;
 import com.fly.jpa.blog.domain.repository.BlogRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -24,5 +28,13 @@ public class BlogRepositoryImpl implements BlogRepository {
     @Override
     public void deleteAll() {
         repository.deleteAll();
+    }
+
+    @Override
+    public List<String> findAllTitleWithLock() {
+        return repository.findAll()
+                .stream()
+                .map(BlogEntity::getTitle)
+                .collect(Collectors.toList());
     }
 }

@@ -33,9 +33,16 @@ public interface BlogJpaRepository extends JpaRepository<BlogEntity, Long>, JpaS
     @Query(value = "select title from blog", nativeQuery = true)
     List<String> findAllTitle();
 
+    /**
+     * 必须在事务内使用锁
+     * OPTIMISTIC_FORCE_INCREMENT 会更新 @version 标记的字段,查询和更新数据的时候
+     */
+
     // select for update,互斥锁,同时只有一个事务可以操作,其余等待
-//    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    //   @Lock(LockModeType.PESSIMISTIC_WRITE)
+
+
     // select for share,共享锁,会与互斥锁互斥,读读之前不阻塞
-    @Lock(LockModeType.PESSIMISTIC_READ)
+    @Lock(LockModeType.WRITE)
     List<BlogEntity> findAll();
 }

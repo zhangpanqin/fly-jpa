@@ -1,5 +1,6 @@
 package com.fly.jpa.blog.service;
 
+import com.fly.jpa.blog.Infrastructure.repository.jpa.UserJpaRepository;
 import com.fly.jpa.blog.domain.command.CreateBlogCommand;
 import com.fly.jpa.blog.domain.entity.Blog;
 import com.fly.jpa.blog.domain.repository.BlogRepository;
@@ -14,7 +15,7 @@ import java.util.List;
 public class BlogAppService {
 
     private final BlogRepository repository;
-
+    private final UserJpaRepository userJpaRepository;
 
     public Blog save(CreateBlogCommand command) {
         var blog = Blog.create(command, 2L);
@@ -28,5 +29,9 @@ public class BlogAppService {
     @Transactional
     public List<String> testLock() {
         return repository.findAllTitleWithLock();
+    }
+
+    public void deleteUserById(Long id) {
+        userJpaRepository.deleteById(id);
     }
 }

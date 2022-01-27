@@ -42,7 +42,7 @@ public interface BlogJpaRepository extends JpaRepository<BlogEntity, Long>, JpaS
     //   @Lock(LockModeType.PESSIMISTIC_WRITE)
 
 
-    // select for share,共享锁,会与互斥锁互斥,读读之前不阻塞
-    @Lock(LockModeType.WRITE)
-    List<BlogEntity> findAll();
+//    // select for share,共享锁,会与互斥锁互斥,读读之前不阻塞
+//    @Lock(LockModeType.WRITE)
+//    List<BlogEntity> findAll();
 }

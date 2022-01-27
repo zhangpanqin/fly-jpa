@@ -10,5 +10,4 @@ spring:
     show-sql: true
 logging:
   level:
-    org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql.BasicBinder: trace

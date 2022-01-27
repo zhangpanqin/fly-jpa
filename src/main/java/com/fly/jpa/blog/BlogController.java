@@ -1,5 +1,7 @@
 package com.fly.jpa.blog;
 
+import cn.hutool.core.collection.CollectionUtil;
+import com.fly.jpa.blog.Infrastructure.repository.jpa.BlogJpaRepository;
 import com.fly.jpa.blog.api.request.CreateBlogRequest;
 import com.fly.jpa.blog.api.response.CreateBlogResponse;
 import com.fly.jpa.blog.domain.entity.User;
@@ -7,6 +9,7 @@ import com.fly.jpa.blog.service.BlogAppService;
 import com.fly.jpa.blog.service.BlogRepresentationService;
 import com.fly.jpa.blog.service.mapper.BlogAppMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +30,8 @@ public class BlogController {
     private final BlogRepresentationService representationService;
 
     private final BlogAppMapper mapper;
+
+    private final BlogJpaRepository repository;
 
     @PostMapping()
     public CreateBlogResponse save(@RequestBody CreateBlogRequest request) {
@@ -56,5 +61,19 @@ public class BlogController {
     @GetMapping("/lock")
     public List<String> testLock() {
         return service.testLock();
+    }
+
+    @GetMapping("/test/save")
+    @Transactional
+    public String testSaveWhenDataNotChange() {
+        var all = repository.findAll();
+
+        if (CollectionUtil.isNotEmpty(all)) {
+            var entity = all.get(0);
+            entity.setTitle("test");
+            repository.save(entity);
+        }
+
+        return "success";
     }
 }

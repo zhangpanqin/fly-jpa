@@ -97,7 +97,7 @@ class BlogJpaRepositoryTest extends BaseIsolationTest {
     }
 
     @Test
-    void should_find_by_spec(){
+    void should_find_by_spec() {
         var entity2 = buildBlogEntity();
         entity2.setUserId(2L);
         var entity = buildBlogEntity();

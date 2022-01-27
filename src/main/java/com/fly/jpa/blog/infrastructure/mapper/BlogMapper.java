@@ -1,6 +1,6 @@
-package com.fly.jpa.blog.Infrastructure.mapper;
+package com.fly.jpa.blog.infrastructure.mapper;
 
-import com.fly.jpa.blog.Infrastructure.entity.BlogEntity;
+import com.fly.jpa.blog.infrastructure.entity.BlogEntity;
 import com.fly.jpa.blog.domain.entity.Blog;
 import org.mapstruct.Mapper;
 

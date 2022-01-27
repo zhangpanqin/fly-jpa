@@ -1,10 +1,10 @@
 package com.fly.jpa;
 
-import com.fly.jpa.blog.Infrastructure.entity.Blog1Entity;
-import com.fly.jpa.blog.Infrastructure.entity.Blog2Entity;
-import com.fly.jpa.blog.Infrastructure.entity.BlogEntity;
-import com.fly.jpa.blog.Infrastructure.entity.User1Entity;
-import com.fly.jpa.blog.Infrastructure.entity.User2Entity;
+import com.fly.jpa.blog.infrastructure.entity.Blog1Entity;
+import com.fly.jpa.blog.infrastructure.entity.Blog2Entity;
+import com.fly.jpa.blog.infrastructure.entity.BlogEntity;
+import com.fly.jpa.blog.infrastructure.entity.User1Entity;
+import com.fly.jpa.blog.infrastructure.entity.User2Entity;
 import org.assertj.core.util.Sets;
 
 import static com.fly.jpa.ConstantValue.CONTENT;

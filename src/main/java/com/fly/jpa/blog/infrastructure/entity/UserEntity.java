@@ -1,4 +1,4 @@
-package com.fly.jpa.blog.Infrastructure.entity;
+package com.fly.jpa.blog.infrastructure.entity;
 
 import com.fly.jpa.common.jpa.BaseEntity;
 import lombok.Getter;

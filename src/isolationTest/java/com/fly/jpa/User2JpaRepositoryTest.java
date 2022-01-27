@@ -1,7 +1,7 @@
 package com.fly.jpa;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.fly.jpa.blog.Infrastructure.repository.jpa.User2JpaRepository;
+import com.fly.jpa.blog.infrastructure.repository.jpa.User2JpaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

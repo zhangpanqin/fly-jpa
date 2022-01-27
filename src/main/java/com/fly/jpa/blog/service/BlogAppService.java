@@ -1,6 +1,6 @@
 package com.fly.jpa.blog.service;
 
-import com.fly.jpa.blog.Infrastructure.repository.jpa.UserJpaRepository;
+import com.fly.jpa.blog.infrastructure.repository.jpa.UserJpaRepository;
 import com.fly.jpa.blog.domain.command.CreateBlogCommand;
 import com.fly.jpa.blog.domain.entity.Blog;
 import com.fly.jpa.blog.domain.repository.BlogRepository;

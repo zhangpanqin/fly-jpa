@@ -1,8 +1,8 @@
-package com.fly.jpa.blog.Infrastructure.repository;
+package com.fly.jpa.blog.infrastructure.repository;
 
-import com.fly.jpa.blog.Infrastructure.entity.BlogEntity;
-import com.fly.jpa.blog.Infrastructure.mapper.BlogMapper;
-import com.fly.jpa.blog.Infrastructure.repository.jpa.BlogJpaRepository;
+import com.fly.jpa.blog.infrastructure.entity.BlogEntity;
+import com.fly.jpa.blog.infrastructure.mapper.BlogMapper;
+import com.fly.jpa.blog.infrastructure.repository.jpa.BlogJpaRepository;
 import com.fly.jpa.blog.domain.entity.Blog;
 import com.fly.jpa.blog.domain.repository.BlogRepository;
 import lombok.RequiredArgsConstructor;

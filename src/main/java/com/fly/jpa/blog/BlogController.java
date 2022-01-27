@@ -1,7 +1,7 @@
 package com.fly.jpa.blog;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.fly.jpa.blog.Infrastructure.repository.jpa.BlogJpaRepository;
+import com.fly.jpa.blog.infrastructure.repository.jpa.BlogJpaRepository;
 import com.fly.jpa.blog.api.request.CreateBlogRequest;
 import com.fly.jpa.blog.api.response.CreateBlogResponse;
 import com.fly.jpa.blog.domain.entity.User;

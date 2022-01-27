@@ -1,7 +1,7 @@
 package com.fly.jpa;
 
-import com.fly.jpa.blog.Infrastructure.entity.BlogEntity;
-import com.fly.jpa.blog.Infrastructure.repository.jpa.BlogJpaRepository;
+import com.fly.jpa.blog.infrastructure.entity.BlogEntity;
+import com.fly.jpa.blog.infrastructure.repository.jpa.BlogJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 import static com.fly.jpa.ConstantMethod.buildBlogEntity;
-import static com.fly.jpa.blog.Infrastructure.repository.jpa.BlogJpaRepository.buildEqContent;
+import static com.fly.jpa.blog.infrastructure.repository.jpa.BlogJpaRepository.buildEqContent;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.data.domain.Sort.Direction.ASC;
 

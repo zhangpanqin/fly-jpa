@@ -1,7 +1,7 @@
 package com.fly.jpa.blog.service;
 
-import com.fly.jpa.blog.Infrastructure.mapper.UserMapper;
-import com.fly.jpa.blog.Infrastructure.repository.jpa.UserJpaRepository;
+import com.fly.jpa.blog.infrastructure.mapper.UserMapper;
+import com.fly.jpa.blog.infrastructure.repository.jpa.UserJpaRepository;
 import com.fly.jpa.blog.domain.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

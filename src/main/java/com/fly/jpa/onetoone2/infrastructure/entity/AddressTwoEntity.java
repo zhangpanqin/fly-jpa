@@ -32,9 +32,5 @@ public class AddressTwoEntity extends BaseEntity {
 
     @Column(name = "user_id")
     private Long userId;
-
-    @OneToOne
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private UsersTwoEntity usersTwo;
 }
 

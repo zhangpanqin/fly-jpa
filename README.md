@@ -51,8 +51,34 @@ Address
 
 
 
-一方在 `Address` ，没办法查询 User 的时候关联出 Address，除非 User 和 Address 同时设置 `OneToOne`，或者 user 和 address 的 id 用一样的。
+一方在 `Address` ，想查询 User 的时候关联出 Address，有三种方案。
+- 双向 oneToOne
 
+```java
+public class UsersTwoEntity extends BaseEntity {
+    private static final long serialVersionUID = -7327279896217322515L;
+    @Column
+    private String username;
+
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "user_id", nullable = false)
+    private AddressTwoEntity address;
+}
+public class AddressTwoEntity extends BaseEntity {
+    private static final long serialVersionUID = -7327279896217322515L;
+    @Column
+    private String city;
+
+    @Column(name = "user_id")
+    private Long userId;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private UsersTwoEntity usersTwo;
+}
+```
+- user 和 address 设置一样的主键 id
+只需要单方面在 user 设置join column
 ```java
 public class UsersTwoEntity extends BaseEntity {
     private static final long serialVersionUID = -7327279896217322515L;
@@ -65,10 +91,22 @@ public class UsersTwoEntity extends BaseEntity {
 }
 ```
 
+- 仅仅只需要单方面使用 manyToOne 在 user
+```java
+public class UsersTwoEntity extends BaseEntity {
+    private static final long serialVersionUID = -7327279896217322515L;
+    @Column
+    private String username;
+
+    @ManyToOne
+    @JoinColumn(name = "id", referencedColumnName = "user_id", updatable = false, insertable = false)
+    private AddressTwoEntity addressTwo;
+}
+```
 
 
 ```shell
 curl --location --request GET 'http://localhost:8080/users2'
-curl --location --request GET 'http://localhost:8080/users2/1'
+curl --location --request GET 'http://localhost:8080/users2/100'
 ```
 

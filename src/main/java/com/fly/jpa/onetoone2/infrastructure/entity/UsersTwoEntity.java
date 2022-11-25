@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToOne;
@@ -36,7 +37,7 @@ public class UsersTwoEntity extends BaseEntity {
     @Column
     private String username;
 
-    @OneToOne(mappedBy = "usersTwo")
+    @ManyToOne
     @JoinColumn(name = "id", referencedColumnName = "user_id", updatable = false, insertable = false)
     private AddressTwoEntity addressTwo;
 }

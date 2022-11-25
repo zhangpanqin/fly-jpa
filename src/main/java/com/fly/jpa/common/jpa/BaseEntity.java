@@ -42,7 +42,7 @@ public abstract class BaseEntity implements Serializable {
     @Id
     @GeneratedValue(generator = "snowFlakeId")
     @GenericGenerator(name = "snowFlakeId", strategy = "com.fly.jpa.common.jpa.SnowflakeIdentifierGenerator")
-    private Long id;
+    public Long id;
 
     @CreatedDate
     @Column(updatable = false)

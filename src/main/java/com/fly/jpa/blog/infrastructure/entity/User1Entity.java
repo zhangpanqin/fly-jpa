@@ -30,6 +30,6 @@ public class User1Entity extends BaseEntity {
     private String name;
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "id", name = "userId", updatable = false)
+    @JoinColumn(referencedColumnName = "id", name = "userId")
     private Set<Blog1Entity> blogs;
 }

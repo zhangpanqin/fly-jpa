@@ -110,3 +110,38 @@ curl --location --request GET 'http://localhost:8080/users2'
 curl --location --request GET 'http://localhost:8080/users2/100'
 ```
 
+### CascadeType.REMOVE 和 orphanRemoval
+
+`CascadeType.REMOVE` 是级联删除关联的 entity，当删除 父 entity.
+
+```java
+public class UserEntity extends BaseEntity {
+    private static final long serialVersionUID = 1L;
+
+    private String name;
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "id",name = "userId")
+    private Set<BlogEntity> blogs;
+}
+public class BlogEntity extends BaseEntity {
+    private static final long serialVersionUID = 1L;
+
+    private String title;
+
+    private Long userId;
+
+    private String content;
+}
+// 级联删除 BlogEntity
+UserJpaRepository.delete(UserEntity)
+```
+
+`orphanRemoval` 也可以删除 entity 或者解除关联关系。
+
+```java
+UserEntity.blogs.remove(someBlogEntity);
+// 设置 `orphanRemoval` 为 true, 删除 remove 的那个 entity,设置为 false ,会更新 BlogEntity 移除关联关系。
+UserJpaRepository.update(UserEntity);
+```
+

@@ -2,8 +2,11 @@ package com.fly.jpa;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.fly.jpa.blog.infrastructure.repository.jpa.User1JpaRepository;
+import org.assertj.core.util.Sets;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.transaction.BeforeTransaction;
 
 import java.util.Set;
 
@@ -17,7 +20,6 @@ import static com.fly.jpa.ConstantMethod.buildUser1Entity;
  * @title
  */
 
-//@Transactional
 class User1JpaRepositoryTest extends BaseIsolationTest {
 
     @Autowired
@@ -30,10 +32,6 @@ class User1JpaRepositoryTest extends BaseIsolationTest {
      */
     @Test
     void should_save_user_and_blog() {
-        var user1Entity = buildUser1Entity();
-        user1Entity.setBlogs(Set.of(buildBlog1Entity()));
-        repository.save(user1Entity);
-
         var all = repository.findAll();
     }
 
@@ -42,8 +40,17 @@ class User1JpaRepositoryTest extends BaseIsolationTest {
         var all = repository.findAll();
         if (CollectionUtil.isNotEmpty(all)) {
             var user1Entity = all.get(0);
-            user1Entity.setBlogs(Set.of());
-            repository.save(user1Entity);
+            user1Entity.getBlogs().remove(user1Entity.getBlogs());
+//            repository.saveAndFlush(user1Entity);
+            repository.delete(user1Entity);
         }
+        System.out.println(repository.findAll());
+    }
+
+    @BeforeEach
+    void before() {
+        var user1Entity = buildUser1Entity();
+        user1Entity.setBlogs(Sets.set(buildBlog1Entity()));
+        repository.save(user1Entity);
     }
 }

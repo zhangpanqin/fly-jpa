@@ -104,7 +104,6 @@ public class UsersTwoEntity extends BaseEntity {
 }
 ```
 
-
 ```shell
 curl --location --request GET 'http://localhost:8080/users2'
 curl --location --request GET 'http://localhost:8080/users2/100'
@@ -143,5 +142,144 @@ UserJpaRepository.delete(UserEntity)
 UserEntity.blogs.remove(someBlogEntity);
 // 设置 `orphanRemoval` 为 true, 删除 remove 的那个 entity,设置为 false ,会更新 BlogEntity 移除关联关系。
 UserJpaRepository.update(UserEntity);
+```
+
+## BaseEntity
+- 建议 @version 不设置默认值，防止保存的时候，误以为是更新操作，触发查询操作。
+
+```java
+public abstract class BaseEntity implements Serializable {
+  	@Id
+    public Long id;
+
+    @Column
+    @Version
+    private Integer version;
+}
+```
+
+JPA 保存的时候会判断 `@version` 标记的字段是否是基本数据类型：
+
+- 如果 `@version` 是基本数据类型会判断 `@Id` 是基本数据类型吗，如果是等于 0 说明是新对象，如果不是基本数据类型，会判断是否为 null,  为 null 说明是新对象。
+- 如果 `@version` 不是基本数据类型，只会判断 `@version` 是否是 null，是 null 则 entity 是新对象。
+
+
+
+综上所述，推荐设置 Id 和 version 为包装类型，且没有默认值。
+
+- 减少条件判断
+- null 更容易表意
+
+
+
+新对象只会保存。如果不是新对象，会触发根据 id 查询数据是否存在，再判断是否更新。
+
+
+
+## 级联操作
+
+### CascadeType.PERSIST
+
+保存 user 的时候级联保存 blog
+
+```java
+@Test
+void save() {
+  var userEntity = buildUserEntity(USER_ID);
+  var blogEntity = buildBlogEntity(1L, USER_ID);
+  userEntity.setBlogs(Set.of(blogEntity));
+  jpaRepository.save(userEntity);
+}
+```
+
+### CascadeType.MERGE
+
+接触 user 和 blog1 的关系通过 update 语句，在插入一条数据 blog2 数据
+
+```java
+@Test
+void update() {
+  var userEntity = buildUserEntity(USER_ID);
+  var blogEntity = buildBlogEntity(1L, USER_ID);
+  userEntity.setBlogs(Sets.newLinkedHashSet(blogEntity));
+  jpaRepository.save(userEntity);
+
+
+  var blogEntity2 = buildBlogEntity(2L, USER_ID);
+  userEntity.setBlogs(Sets.newLinkedHashSet(blogEntity2));
+  System.out.println("1111111111111111111111111111");
+  jpaRepository.save(userEntity);
+}
+```
+
+### CascadeType.REMOVE
+
+当没有软删除的时候，级联删除都是 delete 语句。
+
+当存在软删除的时候：
+
+- update 更新 user 为删除语句
+- update 接触 blog 和 user 的关系，而不会删除 blog
+
+```java
+@Test
+void delete() {
+  var userEntity = buildUserEntity(USER_ID);
+  var blogEntity = buildBlogEntity(1L, USER_ID);
+  var blogEntity2 = buildBlogEntity(2L, USER_ID);
+  userEntity.setBlogs(Set.of(blogEntity, blogEntity2));
+  jpaRepository.save(userEntity);
+  System.out.println("1111111111111111111111111111");
+  jpaRepository.deleteById(USER_ID);
+}
+```
+
+
+
+### CascadeType.DETACH
+
+只是解除关联关系而不会删除数据，不管有没有软删除
+
+- delete 语句删除 user，当存在软删除的时候，只是更新 delete_at 的值
+- update 接触 blog 和 user 的关系，而不会删除 blog
+
+```java
+@Test
+void delete() {
+  var userEntity = buildUserEntity(USER_ID);
+  var blogEntity = buildBlogEntity(1L, USER_ID);
+  var blogEntity2 = buildBlogEntity(2L, USER_ID);
+  userEntity.setBlogs(Set.of(blogEntity, blogEntity2));
+  jpaRepository.save(userEntity);
+  System.out.println("1111111111111111111111111111");
+  jpaRepository.deleteById(USER_ID);
+}
+```
+
+
+
+
+
+### CascadeType.REFRESH
+
+开发不会用，一般是框架内部使用，用于重新从数据库 load 对应的 entity 以及级联 refreshCascadeType.DETACHyd 
+
+```java
+@BeforeTransaction
+void before() {
+  var userEntity = buildUserEntity(USER_ID);
+  var blogEntity = buildBlogEntity(1L, USER_ID);
+  var blogEntity2 = buildBlogEntity(2L, USER_ID);
+  userEntity.setBlogs(Set.of(blogEntity, blogEntity2));
+  jpaRepository.save(userEntity);
+}
+@Test
+@Transactional
+void refresh() throws InterruptedException {
+  var userEntity = jpaRepository.findById(USER_ID).get();
+  System.out.println("1111111111111111111111111111");
+  entityManager.refresh(userEntity);
+  System.out.println(userEntity);
+}
 ```
 

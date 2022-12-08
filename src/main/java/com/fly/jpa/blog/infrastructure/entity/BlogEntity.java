@@ -16,10 +16,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "blog")
 @ToString(callSuper = true)
-@SQLDelete(sql = "UPDATE blog SET deleted_at = EXTRACT(EPOCH FROM NOW()), " +
-        "version = version + 1, last_modified_date = current_timestamp WHERE id = ? AND version = ?",
-        check = ResultCheckStyle.COUNT)
-@Where(clause = BaseEntity.SOFT_DELETED_CLAUSE)
+//@SQLDelete(sql = "UPDATE blog SET deleted_at = EXTRACT(EPOCH FROM NOW()), " +
+//        "version = version + 1, last_modified_date = current_timestamp WHERE id = ? AND version = ?",
+//        check = ResultCheckStyle.COUNT)
+//@Where(clause = BaseEntity.SOFT_DELETED_CLAUSE)
 public class BlogEntity extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

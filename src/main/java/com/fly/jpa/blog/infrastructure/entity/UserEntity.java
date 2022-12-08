@@ -11,8 +11,12 @@ import org.hibernate.annotations.Where;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -20,16 +24,17 @@ import java.util.Set;
 @Entity
 @Table(name = "user_info")
 @ToString(callSuper = true)
-@SQLDelete(sql = "UPDATE user_info SET deleted_at = EXTRACT(EPOCH FROM NOW()), " +
-        "version = version + 1, last_modified_date = current_timestamp WHERE id = ? AND version = ?",
-        check = ResultCheckStyle.COUNT)
-@Where(clause = BaseEntity.SOFT_DELETED_CLAUSE)
+//@SQLDelete(sql = "UPDATE user_info SET deleted_at = EXTRACT(EPOCH FROM NOW()), " +
+//    "version = version + 1, last_modified_date = current_timestamp WHERE id = ? AND version = ?",
+//    check = ResultCheckStyle.COUNT)
+//@Where(clause = BaseEntity.SOFT_DELETED_CLAUSE)
+@NamedEntityGraph(name = "userWithBlogs", attributeNodes = @NamedAttributeNode("blogs"))
 public class UserEntity extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     private String name;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "id",name = "userId")
-    private Set<BlogEntity> blogs;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "id", name = "userId")
+    private Collection<BlogEntity> blogs;
 }

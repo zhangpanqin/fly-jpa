@@ -19,11 +19,11 @@ import org.springframework.web.context.WebApplicationContext;
 
 @SpringBootTest
 @ActiveProfiles("test")
-//@AutoConfigureEmbeddedDatabase(
-//        provider = AutoConfigureEmbeddedDatabase.DatabaseProvider.ZONKY,
-//        type = AutoConfigureEmbeddedDatabase.DatabaseType.POSTGRES
-//)
-//@Transactional
+@AutoConfigureEmbeddedDatabase(
+        provider = AutoConfigureEmbeddedDatabase.DatabaseProvider.ZONKY,
+        type = AutoConfigureEmbeddedDatabase.DatabaseType.POSTGRES
+)
+@Transactional
 public abstract class BaseIsolationTest {
 
     @Autowired

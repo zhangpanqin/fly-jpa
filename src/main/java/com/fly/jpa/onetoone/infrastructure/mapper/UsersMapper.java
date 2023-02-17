@@ -9,4 +9,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface UsersMapper {
     Users toUsers(UsersEntity usersEntity);
+
+    UsersEntity toEntity(Users users);
 }

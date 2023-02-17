@@ -40,8 +40,8 @@ public abstract class BaseEntity implements Serializable {
     public static final String SOFT_DELETED_CLAUSE = "deleted_at = -1";
     private static final long serialVersionUID = 1L;
     @Id
-//    @GeneratedValue(generator = "snowFlakeId")
-//    @GenericGenerator(name = "snowFlakeId", strategy = "com.fly.jpa.common.jpa.SnowflakeIdentifierGenerator")
+    @GeneratedValue(generator = "snowFlakeId")
+    @GenericGenerator(name = "snowFlakeId", strategy = "com.fly.jpa.common.jpa.SnowflakeIdentifierGenerator")
     public Long id;
 
     @CreatedDate

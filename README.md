@@ -283,3 +283,27 @@ void refresh() throws InterruptedException {
 }
 ```
 
+
+
+## 缓存
+
+### 一级缓存(session):内部缓存
+
+事务范围：缓存只能被当前事务访问。缓存的生命周期依赖于事务的生命周期，当事务结束时，缓存也就结束生命周期。
+
+
+
+```java
+// 清除 session 内 entity 缓存
+var session = entityManager.unwrap(Session.class);
+session.clear();
+
+
+entityManager.clear()
+```
+
+
+
+ 
+
+### 二级缓存(sessionFactory)：这个不推荐使用

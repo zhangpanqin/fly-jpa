@@ -1,10 +1,12 @@
 package com.fly.jpa.onetoone;
 
 import com.fly.jpa.onetoone.domain.Users;
+import com.fly.jpa.onetoone2.domain.UsersTwo;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,4 +27,10 @@ public class UserController {
     public List<Users> all() {
         return usersService.all();
     }
+
+    @PostMapping()
+    public Long save(Users usersTwo) {
+        return usersService.save(usersTwo);
+    }
+
 }

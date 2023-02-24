@@ -1,1 +1,10 @@
+pluginManagement {
+    plugins {
+        id 'org.springframework.boot' version '3.0.3'
+        id 'org.unbroken-dome.test-sets' version '4.0.0'
+        id 'com.avast.gradle.docker-compose' version '0.16.11'
+    }
+}
 rootProject.name = 'fly-jpa'
+include 'example'
+

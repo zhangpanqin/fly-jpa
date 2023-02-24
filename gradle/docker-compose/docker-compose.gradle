@@ -3,5 +3,3 @@ apply plugin: 'docker-compose'
 dockerCompose {
     useComposeFiles = ["${rootProject.projectDir}/gradle/docker-compose/docker-compose.yml"]
 }
-
-bootRun.dependsOn composeUp

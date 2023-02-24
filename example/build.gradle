@@ -1,0 +1,32 @@
+plugins {
+    id 'org.springframework.boot'
+    id 'org.unbroken-dome.test-sets'
+}
+
+testSets {
+    isolationTest
+}
+
+isolationTest.shouldRunAfter test
+check.dependsOn isolationTest
+
+dependencies {
+    implementation group: 'cn.hutool', name: 'hutool-all', version: '5.8.12'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.flywaydb:flyway-core'
+    runtimeOnly 'org.postgresql:postgresql'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    isolationTestImplementation "io.zonky.test:embedded-database-spring-test"
+    isolationTestImplementation "io.zonky.test:embedded-postgres"
+
+    implementation 'org.mapstruct:mapstruct'
+    annotationProcessor 'org.mapstruct:mapstruct-processor'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // in order to use main and test of source code in isolationTest
+    isolationTestImplementation sourceSets.test.output
+}
+

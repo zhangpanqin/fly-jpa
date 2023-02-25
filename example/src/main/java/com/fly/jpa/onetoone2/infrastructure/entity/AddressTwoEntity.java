@@ -5,17 +5,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "address2")
-@ToString(callSuper = true)
 @SQLDelete(sql = "UPDATE address2 SET deleted_at = EXTRACT(EPOCH FROM NOW()), " +
         "version = version + 1, last_modified_date = current_timestamp WHERE id = ? AND version = ?",
         check = ResultCheckStyle.COUNT)
@@ -27,5 +23,13 @@ public class AddressTwoEntity extends BaseEntity {
 
     @Column(name = "user_id")
     private Long userId;
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }
 

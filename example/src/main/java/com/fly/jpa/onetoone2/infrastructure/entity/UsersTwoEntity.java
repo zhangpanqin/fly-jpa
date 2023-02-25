@@ -10,17 +10,13 @@ import jakarta.persistence.NamedAttributeNode;
 import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "users2")
-@ToString(callSuper = true)
 @SQLDelete(sql = "UPDATE users2 SET deleted_at = EXTRACT(EPOCH FROM NOW()), " +
     "version = version + 1, last_modified_date = current_timestamp WHERE id = ? AND version = ?",
     check = ResultCheckStyle.COUNT)
@@ -36,5 +32,13 @@ public class UsersTwoEntity extends BaseEntity {
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "id", referencedColumnName = "user_id", updatable = false, insertable = false)
     private AddressTwoEntity addressTwo;
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setAddressTwo(AddressTwoEntity addressTwo) {
+        this.addressTwo = addressTwo;
+    }
 }
 

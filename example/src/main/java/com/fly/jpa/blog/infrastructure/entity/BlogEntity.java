@@ -4,14 +4,12 @@ import com.fly.jpa.common.jpa.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import java.io.Serial;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "blog")
 @SQLDelete(sql = "UPDATE blog SET deleted_at = EXTRACT(EPOCH FROM NOW()), " +
@@ -27,4 +25,16 @@ public class BlogEntity extends BaseEntity {
     private Long userId;
 
     private String content;
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

@@ -24,10 +24,9 @@ subprojects {
 
     configurations {
         parentBom
-        implementation.extendsFrom(parentBom)
-        compileOnly.extendsFrom(parentBom, annotationProcessor)
-        compileClasspath.extendsFrom(parentBom)
         annotationProcessor.extendsFrom(parentBom)
+        compileOnly.extendsFrom(parentBom, annotationProcessor)
+        implementation.extendsFrom(parentBom)
     }
 
     configurations.configureEach {
@@ -44,11 +43,11 @@ subprojects {
     dependencies {
         parentBom platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
         parentBom platform('io.zonky.test.postgres:embedded-postgres-binaries-bom:14.7.0')
+        compileOnly 'org.projectlombok:lombok'
         implementation 'org.mapstruct:mapstruct'
         annotationProcessor 'org.mapstruct:mapstruct-processor'
-        compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
-        implementation 'org.projectlombok:lombok-mapstruct-binding'
+        annotationProcessor 'org.projectlombok:lombok-mapstruct-binding'
     }
 
     compileJava {

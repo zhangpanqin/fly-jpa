@@ -9,14 +9,12 @@ import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "users")
 @ToString(callSuper = true)
@@ -38,5 +36,17 @@ public class UsersEntity extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "addressId", referencedColumnName = "id", insertable = false, updatable = false)
     private AddressEntity address;
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
+    }
+
+    public void setAddress(AddressEntity address) {
+        this.address = address;
+    }
 }
 

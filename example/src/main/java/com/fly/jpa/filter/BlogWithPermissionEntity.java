@@ -1,19 +1,15 @@
 package com.fly.jpa.filter;
 
 import com.fly.jpa.common.jpa.BaseEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import java.io.Serial;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "blog_with_permission")
 @SQLDelete(sql = "UPDATE blog_with_permission SET deleted_at = EXTRACT(EPOCH FROM NOW()), " +
@@ -29,4 +25,16 @@ public class BlogWithPermissionEntity extends DataPermission {
     private Long userId;
 
     private String content;
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

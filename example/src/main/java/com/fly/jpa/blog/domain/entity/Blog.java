@@ -2,19 +2,12 @@ package com.fly.jpa.blog.domain.entity;
 
 import com.fly.jpa.blog.domain.command.CreateBlogCommand;
 import com.fly.jpa.common.domain.BaseDomain;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@SuperBuilder
 public class Blog extends BaseDomain {
-    private Long id;
     private String title;
     private String content;
     private Long userId;

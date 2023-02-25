@@ -1,8 +1,10 @@
 package com.fly.jpa.onetoone2.domain;
 
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 
-@Data
+@Getter
+@Builder
 public class AddressTwo {
     private String city;
 }

@@ -4,14 +4,12 @@ import com.fly.jpa.common.jpa.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
 import java.io.Serial;
 
 @Getter
-@Setter
 @FilterDef(name = "filterByDeptId", parameters = {
     @ParamDef(name = "deptId", type = long.class)
 })
@@ -22,4 +20,8 @@ public abstract class DataPermission extends BaseEntity {
     private static final long serialVersionUID = 6277296905447082902L;
     @Column
     private Long deptId;
+
+    public void setDeptId(Long deptId) {
+        this.deptId = deptId;
+    }
 }

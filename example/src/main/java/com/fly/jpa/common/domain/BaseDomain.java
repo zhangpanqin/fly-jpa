@@ -1,11 +1,11 @@
 package com.fly.jpa.common.domain;
 
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
+@SuperBuilder
 public abstract class BaseDomain {
-    protected Integer version;
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
+    private Integer version;
+    private Long id;
 }

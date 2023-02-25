@@ -1,8 +1,10 @@
 package com.fly.jpa.onetoone2.infrastructure.entity;
 
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 
-@Data
+@Getter
+@Builder
 public class AddressTwo {
     private static final long serialVersionUID = -7327279896217322515L;
 

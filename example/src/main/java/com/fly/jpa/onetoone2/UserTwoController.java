@@ -19,6 +19,11 @@ public class UserTwoController {
         return usersService.get(id);
     }
 
+    @GetMapping("/dirtyCheck/{id}")
+    public UsersTwo dirtyCheck(@PathVariable Long id) {
+        return usersService.dirtyCheck(id);
+    }
+
     @GetMapping()
     public List<UsersTwo> all() {
         return usersService.all();

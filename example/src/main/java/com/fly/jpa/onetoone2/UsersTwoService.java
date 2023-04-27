@@ -26,4 +26,12 @@ public class UsersTwoService {
     public List<UsersTwo> all() {
         return jpaRepository.findAll().stream().map(mapper::toUsers).collect(Collectors.toList());
     }
+
+    @Transactional
+    public UsersTwo dirtyCheck(Long id) {
+       var entity= jpaRepository.findById(id);
+       entity.get().setUsername("dirtyCheck22222");
+        return jpaRepository.findById(id).map(mapper::toUsers)
+            .orElseThrow(EntityNotFoundException::new);
+    }
 }

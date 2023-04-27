@@ -5,9 +5,11 @@ spring:
     password: postgres
   jpa:
     properties:
+      org.hibernate.flushMode: COMMIT
       hibernate:
         format_sql: true
     show-sql: true
 logging:
   level:
-    org.hibernate.type.descriptor.sql.BasicBinder: trace
+      org.hibernate.type.descriptor.sql.BasicBinder: trace
+      root: debug

@@ -10,9 +10,8 @@ version '0.0.1'
 
 allprojects {
     java {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
-        }
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     repositories {
         mavenCentral()
@@ -57,10 +56,6 @@ subprojects {
     tasks.withType(Test).configureEach {
         useJUnitPlatform()
     }
-}
-
-wrapper {
-    gradleVersion "7.6"
 }
 
 apply from: "${rootProject.projectDir}/gradle/docker-compose/docker-compose.gradle"

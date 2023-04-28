@@ -12,7 +12,10 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Entity

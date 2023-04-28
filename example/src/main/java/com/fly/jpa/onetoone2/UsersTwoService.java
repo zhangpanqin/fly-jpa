@@ -4,9 +4,14 @@ import com.fly.jpa.onetoone2.domain.UsersTwo;
 import com.fly.jpa.onetoone2.infrastructure.mapper.UsersTwoMapper;
 import com.fly.jpa.onetoone2.infrastructure.repository.jpa.UsersTwoJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.FlushModeType;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.FlushMode;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +24,7 @@ public class UsersTwoService {
     @Transactional(readOnly = true)
     public UsersTwo get(Long id) {
         return jpaRepository.findById(id).map(mapper::toUsers)
-                .orElseThrow(EntityNotFoundException::new);
+            .orElseThrow(EntityNotFoundException::new);
     }
 
     @Transactional(readOnly = true)
@@ -29,8 +34,8 @@ public class UsersTwoService {
 
     @Transactional
     public UsersTwo dirtyCheck(Long id) {
-       var entity= jpaRepository.findById(id);
-       entity.get().setUsername("dirtyCheck22222");
+        var entity = jpaRepository.findById(id);
+        entity.get().setUsername(Instant.now().toString());
         return jpaRepository.findById(id).map(mapper::toUsers)
             .orElseThrow(EntityNotFoundException::new);
     }

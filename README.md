@@ -302,8 +302,12 @@ session.clear();
 entityManager.clear()
 ```
 
-
+https://learnjava.co.in/hibernate-caching-explained/
 
  
 
 ### 二级缓存(sessionFactory)：这个不推荐使用
+
+
+
+## Dirty Check
